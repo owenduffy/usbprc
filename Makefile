@@ -1,13 +1,15 @@
 # WinAVR cross-compiler toolchain is used here
-CC = avr-gcc
-OBJCOPY = avr-objcopy
+
+WINAVR = C:/WinAVR-20100110/bin/
+CC = $(WINAVR)avr-gcc
+OBJCOPY = $(WINAVR)avr-objcopy
 DUDE = avrdude
 
 # If you are not using ATtiny85 and the USBtiny programmer, 
 # update the lines below to match your configuration
 CFLAGS = -Wall -Os -Iusbdrv -mmcu=attiny85 -DF_CPU=16500000
 OBJFLAGS = -j .text -j .data -O ihex
-DUDEFLAGS = -p attiny85 -c usbtiny -v
+DUDEFLAGS = -P usb -c avrisp2 -p t85 
 
 # Object files for the firmware (usbdrv/oddebug.o not strictly needed I think)
 OBJECTS = usbdrv/usbdrv.o usbdrv/oddebug.o usbdrv/usbdrvasm.o main.o
