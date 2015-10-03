@@ -1,11 +1,3 @@
-/*
- * USB Business Card - Frank Zhao
- * Please see http://www.frank-zhao.com/card/
- * Some settings are conditionally activated if you are simulating using an USnooBie
- *
- * This is the V-USB configuration file used for this project
-*/
-
 /* Name: usbconfig.h
  * Project: V-USB, virtual USB port for Atmel's(r) AVR(r) microcontrollers
  * Author: Christian Starkjohann
@@ -40,11 +32,11 @@ section at the end of this file).
 /* This is the port where the USB bus is connected. When you configure it to
  * "B", the registers PORTB, PINB and DDRB will be used.
 */
-#define USB_CFG_DMINUS_BIT      4 // CHANGED, see hardware
+#define USB_CFG_DMINUS_BIT      3 // CHANGED, see hardware
 /* This is the bit number in USB_CFG_IOPORT where the USB D- line is connected.
  * This may be any bit in the port.
 */
-#define USB_CFG_DPLUS_BIT       3 // CHANGED, see hardware
+#define USB_CFG_DPLUS_BIT       4 // CHANGED, see hardware
 /* This is the bit number in USB_CFG_IOPORT where the USB D+ line is connected.
  * This may be any bit in the port. Please note that D+ must also be connected
  * to interrupt pin INT0! [You can also use other interrupts, see section
