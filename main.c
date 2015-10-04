@@ -18,14 +18,14 @@
 // *** BASIC PROGRAM DEFINITIONS ***
 // *********************************
 
-#define PASS_LENGTH 10 // password length for generated password
+#define PASS_LENGTH 50 // password length for generated password
 #define SEND_ENTER 0 // define to 1 if you want to send ENTER after password
 
-PROGMEM uchar measuring_message[] = "Starting generation...";
+PROGMEM uchar measuring_message[] = "Starting generation: ";
 PROGMEM uchar finish_message[] = " New password saved.";
 
 // The buffer needs to accommodate the messages above and the password
-#define MSG_BUFFER_SIZE 32 
+#define MSG_BUFFER_SIZE PASS_LENGTH+2
 
 EEMEM uchar stored_password[MSG_BUFFER_SIZE];
 
@@ -231,7 +231,7 @@ void hadUsbReset() {
 // presses caps lock). Of course USB timings may decrease this randomness 
 // - replace with a better one if you want.
 uchar generate_character() {
-    uchar counter = TCNT0 & 63;
+    uchar counter = TCNT0 % 62;
     
     if(counter < 26)
         return 'a' + counter;
@@ -247,6 +247,9 @@ uchar generate_character() {
 
 #define CAPS_COUNTING 0
 #define CAPS_MEASURING 1
+#define NUM_LOCK 1
+#define CAPS_LOCK 2
+#define SCROLL_LOCK 4
 
 static uchar capsCount = 0;
 static uchar capsState = CAPS_COUNTING;
@@ -267,15 +270,17 @@ void caps_toggle() {
         messageState = STATE_SEND;
     } else {
         messageBuffer[capsCount++] = generate_character();
-        
-        if(capsCount >= PASS_LENGTH) { // enough characters generated
-#if SEND_ENTER
-            messageBuffer[capsCount++] = '\n';
-#endif
-            messageBuffer[capsCount] = '\0';
+        //memcpy_P(messageBuffer, dot, sizeof(dot));
+        //messagePtr = 0;
+        //messageState = STATE_SEND;
+
+        if(capsCount >= (PASS_LENGTH) || LED_state & NUM_LOCK) { // enough characters generated
+            if(LED_state & SCROLL_LOCK) // terminate with \n
+	              messageBuffer[capsCount++] = '\n';
+            messageBuffer[capsCount++] = '\0';
             
             // Store password to EEPROM - might lose the USB connection, but so what
-            eeprom_write_block(messageBuffer, stored_password, sizeof(messageBuffer));
+            eeprom_write_block(messageBuffer, stored_password, capsCount);
             
             // Type a message to the PC that new password has been generated
             memcpy_P(messageBuffer, finish_message, sizeof(finish_message));
