@@ -12,8 +12,6 @@ newline. The changes comprise: maximum password length configured to 50
 characters, toggling NUM LOCK adds a character and terminates generationm, 
 and if SCROLL LOCK is on, a newline is appended to the password message.
 
-Defaults are for the Digispark ATTiny85 USB module, and a jumper is required 
-from PB2 to PB4. (It should be possible to change the code to use PC interrupt 
-and not require the jumper.)
+Defaults are for the Digispark ATTiny85 USB module.
 
 

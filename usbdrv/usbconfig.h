@@ -390,13 +390,13 @@ extern void usbEventResetReady(void);
  * which is not fully supported (such as IAR C) or if you use a differnt
  * interrupt than INT0, you may have to define some of these.
 */
-/* #define USB_INTR_CFG            MCUCR */
-/* #define USB_INTR_CFG_SET        ((1 << ISC00) | (1 << ISC01)) */
-/* #define USB_INTR_CFG_CLR        0 */
-/* #define USB_INTR_ENABLE         GIMSK */
-/* #define USB_INTR_ENABLE_BIT     INT0 */
-/* #define USB_INTR_PENDING        GIFR */
-/* #define USB_INTR_PENDING_BIT    INTF0 */
-/* #define USB_INTR_VECTOR         SIG_INTERRUPT0 */
+#define USB_INTR_CFG            GIMSK         
+#define USB_INTR_CFG_SET        (1 << PCIE)     
+//#define USB_INTR_CFG_CLR        0
+#define USB_INTR_ENABLE         PCMSK        
+#define USB_INTR_ENABLE_BIT     PCINT4        
+#define USB_INTR_PENDING        GIFR         
+#define USB_INTR_PENDING_BIT    PCIF         
+#define USB_INTR_VECTOR         PCINT0_vect
 
 #endif /* __usbconfig_h_included__ */
