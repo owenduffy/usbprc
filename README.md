@@ -1,4 +1,6 @@
-USB Password Replay Card (USB RPC) is an enhancement of DIY USB password 
+# USB Password Replay Card (USB PRC)
+
+USB Password Replay Card (USB PRC) is an enhancement of DIY USB password 
 generator (http://codeandlife.com/2012/03/03/diy-usb-password-generator/)
 by Joonas Pihlajamaa.
 
@@ -13,5 +15,3 @@ characters, toggling NUM LOCK adds a character and terminates generationm,
 and if SCROLL LOCK is on, a newline is appended to the password message.
 
 Defaults are for the Digispark ATTiny85 USB module.
-
-
