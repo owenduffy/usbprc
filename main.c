@@ -11,8 +11,8 @@
 #include <avr/eeprom.h>
 #include <util/delay.h>
 
-#include "usbconfig.h"
 #include "usbdrv.h"
+#include "usbconfig.h"
 
 // *********************************
 // *** BASIC PROGRAM DEFINITIONS ***

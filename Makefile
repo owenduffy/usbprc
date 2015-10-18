@@ -7,7 +7,7 @@ DUDE = avrdude
 
 # If you are not using ATtiny85 and the USBtiny programmer, 
 # update the lines below to match your configuration
-CFLAGS = -Wall -Os -Iusbdrv -mmcu=attiny85 -DF_CPU=16500000
+CFLAGS = -Wall -Os -Iusbdrv -I. -mmcu=attiny85 -DF_CPU=16500000
 OBJFLAGS = -j .text -j .data -O ihex
 DUDEFLAGS = -P usb -c avrisp2 -p t85 
 
@@ -38,7 +38,7 @@ main.elf: $(OBJECTS)
 
 # Without this dependance, .o files will not be recompiled if you change 
 # the config! I spent a few hours debugging because of this...
-$(OBJECTS): usbdrv/usbconfig.h
+$(OBJECTS): usbconfig.h
 
 # From C source to .o object file
 %.o: %.c	
